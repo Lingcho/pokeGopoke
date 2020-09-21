@@ -1,0 +1,7 @@
+{
+  "name": "pokeGopoke",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
