@@ -11,6 +11,9 @@
     </ion-toolbar>
   </ion-header>
   <ion-card *ngFor="let pokemon of pokemons">
+    <ion-thumbnail>
+      <img src="{{pokemon.urlImage}}" />
+    </ion-thumbnail>
     <ion-card-content> {{pokemon.name}} </ion-card-content>
   </ion-card>
 </ion-content>
