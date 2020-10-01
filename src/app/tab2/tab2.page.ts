@@ -1,4 +1,5 @@
 import { Component } from "@angular/core";
+import { Console } from 'console';
 import { ApiService } from "../api.service";
 
 @Component({
@@ -7,6 +8,8 @@ import { ApiService } from "../api.service";
   styleUrls: ["tab2.page.scss"],
 })
 export class Tab2Page {
+  Pokedex = require('pokedex-promise-v2');  
+  P = new this.Pokedex();
   pokemons;
   urlPokemons = [];
   idPokemons = [];
@@ -14,6 +17,18 @@ export class Tab2Page {
   constructor(private apiService: ApiService) {}
 
   ionViewDidEnter() {
+ 
+
+ //   this.P.getCharacteristicById(1)
+   // .then(function(response) {
+     // console.log(response);
+    // })
+    //.catch(function(error) {
+      //console.log('There was an ERROR: ', error);
+    //})
+
+
+
     this.apiService.getPokemons().subscribe((data) => {
       this.pokemons = data["results"];
 
@@ -23,18 +38,19 @@ export class Tab2Page {
         let uri = pokemon.url;
         uri = uri.substring(0, uri.length - 1);
 
-        console.log(this.pokemons);
         pokemon["id"] = getLastItem(uri);
         pokemon[
           "urlImage"
         ] = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${getLastItem(
           uri
         )}.png`;
+
       });
+      console.log(this.pokemons[1].id)
     });
 
-    console.log("en haut >>>>>", this.urlPokemons);
-
-    console.log("en bas >>>>>", this.idPokemons);
+   
+    
+    
   }
 }
