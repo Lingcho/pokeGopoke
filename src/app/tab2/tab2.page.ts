@@ -1,15 +1,17 @@
 import { Component } from "@angular/core";
-import { Console } from 'console';
 import { ApiService } from "../api.service";
+let Pokedex = require('pokedex-promise-v2')
 
 @Component({
   selector: "app-tab2",
   templateUrl: "tab2.page.html",
   styleUrls: ["tab2.page.scss"],
 })
+
 export class Tab2Page {
-  Pokedex = require('pokedex-promise-v2');  
-  P = new this.Pokedex();
+  
+P = new Pokedex
+
   pokemons;
   urlPokemons = [];
   idPokemons = [];
@@ -17,17 +19,15 @@ export class Tab2Page {
   constructor(private apiService: ApiService) {}
 
   ionViewDidEnter() {
+
+    this.P.getBerryByName('cheri')
+    .then(function(response) {
+      console.log(response);
+    })
+    .catch(function(error) {
+      console.log('There was an ERROR: ', error);
+    });
  
-
- //   this.P.getCharacteristicById(1)
-   // .then(function(response) {
-     // console.log(response);
-    // })
-    //.catch(function(error) {
-      //console.log('There was an ERROR: ', error);
-    //})
-
-
 
     this.apiService.getPokemons().subscribe((data) => {
       this.pokemons = data["results"];
