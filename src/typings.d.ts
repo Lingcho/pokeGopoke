@@ -1,1 +1,1 @@
-declare module 'pokedex-promise-v2'
+// declare module 'pokedex-promise-v2'

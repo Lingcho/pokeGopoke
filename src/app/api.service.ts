@@ -5,7 +5,7 @@ import { HttpClient } from "@angular/common/http";
   providedIn: "root",
 })
 export class ApiService {
-
+  
   offset = 0;
 
   constructor(private httpClient: HttpClient) {}
@@ -18,9 +18,6 @@ export class ApiService {
     return this.httpClient.get(`https://pokeapi.co/api/v2/pokemon?offset=${this.offset}&limit=20`)
   }
 
-  getPokemonsDetails(id){
-    return this.httpClient.get('https://pokeapi.co/api/v2/pokemon-species/${id}/');
-  }
 }
 
 
