@@ -25,9 +25,11 @@ P = new Pokedex(this.options)
   
   
   constructor(private apiService: ApiService) {}
-
+  ngOnInit(){
+    
+  }
   ionViewDidEnter() {
-
+    
     this.P.getPokemonByName([1,2,3]) // with Promise
     .then(function(response) {
       console.log(response);
@@ -61,6 +63,7 @@ P = new Pokedex(this.options)
       
        console.log(data.names[4].name)
        pokemon["frenchName"] = data.names[4].name
+       pokemon["pokeColor"] = data.color.name
       });
    
       });
@@ -72,6 +75,10 @@ P = new Pokedex(this.options)
 
    
     
-    
   }
+
+  plusPokemon() {
+     alert("Tab2 hello")
+  }
+   
 }

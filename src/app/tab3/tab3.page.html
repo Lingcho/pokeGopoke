@@ -3,15 +3,24 @@
     <ion-title>
       Tab Test
     </ion-title>
+    <ion-button slot="end" (click) = "previousPoke()" >
+      <ion-icon name="play-back-circle-outline"></ion-icon>    </ion-button>
+      <ion-button slot="end" (click) = "nextPoke()" >
+      <ion-icon name="play-forward-circle-outline"></ion-icon>    </ion-button>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 3</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <app-explore-container name="Tab 3 page"></app-explore-container>
+  <ion-card >
+    <ion-item *ngFor="let item of dataPokes">
+      <ion-icon name="pin" slot="start"></ion-icon>
+      <ion-label>{{item.name}}</ion-label>
+      <ion-button fill="outline" slot="end">View</ion-button>
+    </ion-item>
+  
+    <ion-card-content>
+      This is content, without any paragraph or header tags,
+      within an ion-card-content element.
+    </ion-card-content>
+  </ion-card>
 </ion-content>
