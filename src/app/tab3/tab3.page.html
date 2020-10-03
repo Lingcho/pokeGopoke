@@ -13,9 +13,13 @@
 <ion-content [fullscreen]="true">
   <ion-card >
     <ion-item *ngFor="let item of dataPokes">
-      <ion-icon name="pin" slot="start"></ion-icon>
-      <ion-label>{{item.name}}</ion-label>
-      <ion-button fill="outline" slot="end">View</ion-button>
+      <ion-img [src]="item?.urlImage"></ion-img>
+      <ion-label [ngStyle]="{color: item?.pokeColor,'background-color': '#e9ecef'}">
+        {{item?.frenchName}}
+      </ion-label>
+      <ion-button fill="outline" slot="end" [ngStyle]="{color: item?.pokeColor}">
+        Détails
+      </ion-button>
     </ion-item>
   
     <ion-card-content>
@@ -23,4 +27,5 @@
       within an ion-card-content element.
     </ion-card-content>
   </ion-card>
+  
 </ion-content>
