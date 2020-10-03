@@ -3,7 +3,8 @@
     <ion-title>
       Tab Test
     </ion-title>
-    <ion-button slot="end" (click) = "previousPoke()" >
+    
+    <ion-button *ngIf="previouss" slot="end" (click) = "previousPoke()" >
       <ion-icon name="play-back-circle-outline"></ion-icon>    </ion-button>
       <ion-button slot="end" (click) = "nextPoke()" >
       <ion-icon name="play-forward-circle-outline"></ion-icon>    </ion-button>

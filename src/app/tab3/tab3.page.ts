@@ -31,24 +31,38 @@ export class Tab3Page {
     fetch(url)
     .then(response => response.json())
     .then((res) => {
-      console.log(res)
+      
       this.data = res
       this.dataPokes = res.results
       this.displayPoke()
    
      });
    }
+   previouss:boolean;
    pokePlus: any;
    nextPoke(){
      this.pokePlus = this.data["next"]
     this.getNew(this.pokePlus)
-    console.log(this.pokePlus)
-    
+   
+    this.previouss=true
    }
+
+   
    previousPoke(){
-    this.pokePlus = this.data["previous"]
-   this.getNew(this.pokePlus)
-   console.log(this.pokePlus)
+     
+     if (this.data["previous"]) {
+      this.pokePlus = this.data["previous"]
+      this.getNew(this.pokePlus)
+      
+      this.previouss = true
+      console.log("precedent", this.previouss)
+      console.log(this.data.previous)
+     } if (this.data.previous == "https://pokeapi.co/api/v2/pokemon?offset=0&limit=20") {
+      this.previouss = false
+      console.log("audebut", this.previouss)
+      
+     }
+   
     
   }
 
@@ -72,8 +86,6 @@ export class Tab3Page {
     fetch(pokemon.urlSpecie)
     .then(response => response.json())
     .then((data) => {
-    
-    console.log(data.names[4].name)
     pokemon["frenchName"] = data.names[4].name
     pokemon["pokeColor"] = data.color.name
     });
