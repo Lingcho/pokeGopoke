@@ -21,8 +21,8 @@ export class ApiService {
     return this.http.get(`https://pokeapi.co/api/v2/pokemon?offset=${this.offset}&limit=20`)
   }
 
-  getPokemonsDetails(id){
-    return this.http.get('https://pokeapi.co/api/v2/pokemon-species/${id}/');
+  getPokemonDetails(id){
+    return this.http.get('https://pokeapi.co/api/v2/pokemon-species/?${id}/');
   }
 
 
