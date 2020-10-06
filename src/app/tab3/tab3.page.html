@@ -1,31 +1,90 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-title>
-      Tab Test
+      Détails
     </ion-title>
-    
-    <ion-button *ngIf="previouss" slot="end" (click) = "previousPoke()" >
-      <ion-icon name="play-back-circle-outline"></ion-icon>    </ion-button>
-      <ion-button slot="end" (click) = "nextPoke()" >
-      <ion-icon name="play-forward-circle-outline"></ion-icon>    </ion-button>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tab2"></ion-back-button>
+    </ion-buttons>
+  
+  <ion-button slot="end" (click) = "nextPokeDetails()" >
+  <ion-icon name="play-forward-circle-outline"></ion-icon>    
+  </ion-button>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-card >
-    <ion-item *ngFor="let item of dataPokes">
-      <ion-img [src]="item?.urlImage"></ion-img>
-      <ion-label [ngStyle]="{color: item?.pokeColor,'background-color': '#e9ecef'}">
-        {{item?.frenchName}}
-      </ion-label>
-      <ion-button fill="outline" slot="end" [ngStyle]="{color: item?.pokeColor}">
-        Détails
-      </ion-button>
-    </ion-item>
-  
-    <ion-card-content>
-      This is content, without any paragraph or header tags,
-      within an ion-card-content element.
+<ion-content padding>
+ 
+  <ion-card *ngIf="details">
+    <ion-card-header>
+      <ion-card-title>
+        {{ details.names[4].name }}
+      </ion-card-title>
+      <ion-card-subtitle>
+       {{details.genera[3].genus}}
+      </ion-card-subtitle>
+    </ion-card-header>
+
+    
+    <ion-card-content *ngIf="poke">
+      <ion-grid>
+        
+        <ion-row>
+          <ion-col>
+            <ion-img [src]="poke.sprites.front_default" align-text="center"></ion-img>
+          </ion-col>
+          <ion-col>
+            Résumé:
+          <br>
+          {{details.flavor_text_entries[16].flavor_text}}
+            
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-item lines="none">
+              <ion-icon [src]="heart" slot="start"></ion-icon>
+              <ion-label>{{poke.stats[0].base_stat}}</ion-label>
+            </ion-item>
+            <ion-item lines="none">
+              <ion-icon [src]="sword1" slot="start"></ion-icon>
+              <ion-label>{{poke.stats[1].base_stat}}</ion-label>
+            </ion-item>
+            <ion-item lines="none">
+              <ion-icon [src]="shield2" slot="start"></ion-icon>
+              <ion-label>{{poke.stats[2].base_stat}}</ion-label>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item lines="none">
+              <ion-icon [src]="sword2" slot="start"></ion-icon>
+              <ion-label>{{poke.stats[3].base_stat}}</ion-label>
+            </ion-item>
+            <ion-item lines="none">
+              <ion-icon [src]="shield1" slot="start"></ion-icon>
+              <ion-label>{{poke.stats[4].base_stat}}</ion-label>
+            </ion-item>
+            <ion-item lines="none">
+              <ion-icon [src]="speed" slot="start"></ion-icon>
+              <ion-label>{{poke.stats[5].base_stat}}</ion-label>
+            </ion-item>
+          </ion-col>
+          
+
+        </ion-row>
+
+
+      </ion-grid>
+ 
+     
+      
+ 
+      <!-- <ion-item lines="none">
+        <ion-icon name="clipboard" slot="start"></ion-icon>
+        <ion-label text-wrap>{{ information.Director }}</ion-label>
+      </ion-item>
+  -->
+     
     </ion-card-content>
   </ion-card>
   

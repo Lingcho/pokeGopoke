@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
 import { ApiService } from "../api.service";
-// let Pokedex = require('pokedex-promise-v2')
+
 
 @Component({
   selector: "app-tab2",
@@ -13,17 +13,10 @@ import { ApiService } from "../api.service";
 export class Tab2Page {
   data: any;
   dataPokes: any;
+
   
   constructor(private http: ApiService) {}
-// options = {
-//   protocol: 'https',
-//   hostName: 'pokeapi.co',
-//   versionPath: '/api/v2/',
-//   cacheLimit: 100 * 1000, // 100s
-//   timeout: 5 * 1000 // 5s
-// }
 
-// P = new Pokedex(this.options)
   ngOnInit(){ 
     this.getDataUser();
    
@@ -53,15 +46,15 @@ export class Tab2Page {
 
 
    pokedetails:any;
-    details() {
-      this.pokedetails = this.dataPokes
+  //   details() {
+  //     this.pokedetails = this.dataPokes
     
-  }
+  // }
    previouss:boolean;
    pokePlus: any;
    nextPoke(){
      this.pokePlus = this.data["next"]
-    this.getNew("https://pokeapi.co/api/v2/pokemon?offset=794&limit=20")
+    this.getNew(this.pokePlus)
    
     this.previouss=true               
    }
@@ -107,19 +100,19 @@ export class Tab2Page {
     .then(response => response.json())
     .then((data) => {
     if (data.names.length > 0) {
-      console.log("xxxxxxxxxxxxxxxxx")
+     
       pokemon["frenchName"] = data.names[4].name
     } else {
    
 
       pokemon["frenchName"] = this.capitalize(data.name)
-  console.log("AAAAAAAAAAAAAA")
+  
     } 
    if (data.color != null) {
     pokemon["pokeColor"] = data.color.name
    }
     
-    console.log(pokemon)
+   
     });
 
 });

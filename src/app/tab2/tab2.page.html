@@ -3,17 +3,24 @@
     <ion-title>
      Liste Pokes
     </ion-title>
-    
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
     <ion-button *ngIf="previouss" slot="end" (click) = "previousPoke()" >
-      <ion-icon name="play-back-circle-outline"></ion-icon>    </ion-button>
+      <ion-icon name="play-back-circle-outline"></ion-icon>
+    </ion-button>
       <ion-button slot="end" (click) = "nextPoke()" >
-      <ion-icon name="play-forward-circle-outline"></ion-icon>    </ion-button>
+      <ion-icon name="play-forward-circle-outline"></ion-icon>    
+    </ion-button>
   </ion-toolbar>
 </ion-header>
+
 
 <ion-content [fullscreen]="true">
   <ion-card >
     <ion-item *ngFor="let item of dataPokes">
+    
+      
       <ion-img [src]="item?.urlImage"></ion-img>
 
   <ion-label [ngStyle]="{color: item?.pokeColor,'background-color': '#e9ecef'}">   
@@ -21,8 +28,10 @@
   </ion-label>
 
 
-      <ion-button fill="outline" slot="end" [ngStyle]="{color: item?.pokeColor}"
-      (click)="details()">
+
+
+      <ion-button fill="outline" slot="end" [routerLink]="['/tab3', item.id]" [ngStyle]="{color: item?.pokeColor}"
+      >
         Détails
       </ion-button>
     </ion-item>
