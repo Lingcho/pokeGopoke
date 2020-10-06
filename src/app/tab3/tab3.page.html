@@ -33,10 +33,12 @@
           <ion-col>
             <ion-img [src]="poke.sprites.front_default" align-text="center"></ion-img>
           </ion-col>
-          <ion-col>
+          <ion-col *ngIf="flavor">
             Résumé:
           <br>
-          {{details.flavor_text_entries[16].flavor_text}}
+          {{flavor[0]}}
+          <br>
+          {{flavor[flavor.length-1]}}
             
           </ion-col>
         </ion-row>

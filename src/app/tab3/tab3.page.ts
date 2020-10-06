@@ -27,7 +27,7 @@ export class Tab3Page implements OnInit{
   details:any;
   poke:any;
   idPoke:any;
-
+flavor:any;
   constructor(private activatedRoute: ActivatedRoute, private http: ApiService) {}
   
   ngOnInit(){ 
@@ -37,10 +37,28 @@ export class Tab3Page implements OnInit{
    
   }
 
+  
   displayPokedetails(id){
+  
+    
     this.http.getPokemonDetails(id).subscribe(result => {
       this.details = result
       console.log("pokess",this.details)
+  
+     let flavors = this.findValuesHelper(this.details, "flavor_text_entries")
+     
+   
+      let frenchFlavor = []
+     flavors.forEach(element => {
+       
+      element.forEach(ele => {
+        if (ele.language.name == "fr") {
+          frenchFlavor.push(ele.flavor_text)
+          this.flavor = frenchFlavor
+        }
+      });
+      
+     });
     });
     
     this.P.getPokemonByName(id) // with Promise
@@ -49,6 +67,7 @@ export class Tab3Page implements OnInit{
      this.poke = response
     
     })
+    
   }
 
   nextPokedetails() {
@@ -56,12 +75,27 @@ export class Tab3Page implements OnInit{
     this.displayPokedetails(counterId)
     
   }
+  findValuesHelper(obj, key) {
+    let list = [ ];
+    if (!obj) return list;
+    if (obj instanceof Array) {
+        for (var i in obj) {
+            list = list.concat(this.findValuesHelper(obj[i], key));
+        }
+        return list;
+    }
+    if (obj[key]) list.push(obj[key]);
 
-  getDeepArray() {
-
-  }
-  
-  
+    if ((typeof obj == "object") && (obj !== null)) {
+        let children = Object.keys(obj);
+        if (children.length > 0) {
+            for (let i = 0; i < children.length; i++) {
+                list = list.concat(this.findValuesHelper(obj[children[i]], key));
+            }
+        }
+    }
+    return list;
+}
 
 }
 
