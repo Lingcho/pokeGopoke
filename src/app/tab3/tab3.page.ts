@@ -26,17 +26,41 @@ export class Tab3Page implements OnInit{
  
   details:any;
   poke:any;
-  idPoke:any;
-flavor:any;
+  idPoke:number;
+  flavor:any;
+  previouss:boolean;
+  flavorPlus = true ;
   constructor(private activatedRoute: ActivatedRoute, private http: ApiService) {}
   
   ngOnInit(){ 
     let id = this.activatedRoute.snapshot.paramMap.get('id')
-    this.idPoke = id
     this.displayPokedetails(id)
    
   }
 
+  nextPokeDetails(){
+    this.previouss = true
+    let idPoke = this.details.id
+    idPoke +=1
+    console.log(idPoke)
+    this.displayPokedetails(idPoke)
+  }
+
+  previousPokeDetails(){
+    if (this.details.id == 2) {
+      this.previouss = false
+      console.log(this.previouss)
+    }
+      
+      
+    let idPoke = this.details.id
+    
+    idPoke -=1
+    console.log(idPoke)
+    this.displayPokedetails(idPoke)
+    
+    
+  }
   
   displayPokedetails(id){
   
@@ -46,8 +70,6 @@ flavor:any;
       console.log("pokess",this.details)
   
      let flavors = this.findValuesHelper(this.details, "flavor_text_entries")
-     
-   
       let frenchFlavor = []
      flavors.forEach(element => {
        
@@ -95,8 +117,12 @@ flavor:any;
         }
     }
     return list;
-}
+  }
+
+  onflavor() {
+    
+    this.flavorPlus = !this.flavorPlus
 
 }
-
+}
 

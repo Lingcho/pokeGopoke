@@ -65,13 +65,10 @@ export class Tab2Page {
      if (this.data["previous"]) {
       this.pokePlus = this.data["previous"]
       this.getNew(this.pokePlus)
-      
       this.previouss = true
-      console.log("precedent", this.previouss)
-      console.log(this.data.previous)
+  
      } if (this.data.previous == "https://pokeapi.co/api/v2/pokemon?offset=0&limit=20") {
       this.previouss = false
-      console.log("audebut", this.previouss)
       
      }
    
@@ -87,8 +84,6 @@ export class Tab2Page {
     uri = uri.substring(0, uri.length - 1);
     let idPoke = getLastItem(uri)
     pokemon["id"] = idPoke;
-    
-
     pokemon[
       "urlImage"
     ] = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${idPoke}.png`;
@@ -99,26 +94,29 @@ export class Tab2Page {
     fetch(pokemon.urlSpecie)
     .then(response => response.json())
     .then((data) => {
-    if (data.names.length > 0) {
-     
-      pokemon["frenchName"] = data.names[4].name
-    } else {
-   
-
-      pokemon["frenchName"] = this.capitalize(data.name)
-  
-    } 
-   if (data.color != null) {
-    pokemon["pokeColor"] = data.color.name
-   }
-    
+      if (data.names.length > 0) {
+        pokemon["frenchName"] = data.names[4].name
+      } else {
+        pokemon["frenchName"] = this.capitalize(data.name)
+      } 
+      if (data.color != null) {
+       } if (data.color.name == "white"){
+        pokemon["pokeColor"] = "grey"
+       }else if(data.color.name == "yellow"){
+         pokemon["pokeColor"] = "orange"
+        }else if(data.color.name == "pink"){
+          pokemon["pokeColor"] = "HotPink"
+       } else {
+        pokemon["pokeColor"] = data.color.name
+       }
    
     });
 
-});
+    });
   }
  
   capitalize(str) {
     return str.charAt(0).toUpperCase() + str.slice(1);
   }
+  
 }

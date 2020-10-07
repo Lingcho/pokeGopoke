@@ -3,6 +3,9 @@
     <ion-title>
       Détails
     </ion-title>
+    <ion-button *ngIf="previouss" slot="end" (click) = "previousPokeDetails()" >
+      <ion-icon name="play-back-circle-outline"></ion-icon>
+    </ion-button>
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/tab2"></ion-back-button>
     </ion-buttons>
@@ -30,15 +33,25 @@
       <ion-grid>
         
         <ion-row>
-          <ion-col>
-            <ion-img [src]="poke.sprites.front_default" align-text="center"></ion-img>
+          <ion-col class="infos-img" >
+            <ion-img [src]="poke.sprites.front_default" ></ion-img>
           </ion-col>
           <ion-col *ngIf="flavor">
             Résumé:
           <br>
           {{flavor[0]}}
           <br>
-          {{flavor[flavor.length-1]}}
+          <span>
+            <ion-icon size="small" name="caret-down-circle-outline" (click)="onflavor()" [hidden]="!flavorPlus"></ion-icon>
+          </span>
+          
+          <div class="flavor-plus" [hidden]="flavorPlus" (click)="onflavor()" >
+            {{flavor[flavor.length-1]}}
+          </div>
+          <span>
+            <ion-icon size="small" name="caret-up-circle-outline" (click)="onflavor()" [hidden]="flavorPlus"></ion-icon>
+          </span>
+          
             
           </ion-col>
         </ion-row>
