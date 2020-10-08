@@ -13,7 +13,6 @@ import { ApiService } from "../api.service";
 export class Tab2Page {
   data: any;
   dataPokes: any;
-
   
   constructor(private http: ApiService) {}
 
@@ -46,19 +45,21 @@ export class Tab2Page {
 
 
    pokedetails:any;
-  //   details() {
-  //     this.pokedetails = this.dataPokes
-    
-  // }
    previouss:boolean;
+  
    pokePlus: any;
+   nextButton:boolean;
    nextPoke(){
-     this.pokePlus = this.data["next"]
-    this.getNew(this.pokePlus)
-   
-    this.previouss=true               
-   }
-
+     if (this.data["next"]) {
+      this.pokePlus = this.data["next"]
+      this.getNew(this.pokePlus)
+      this.previouss=true 
+          console.log(this.data)
+     } if (this.data.next =="https://pokeapi.co/api/v2/pokemon?offset=1040&limit=10") {
+        this.nextButton = true
+     }
+            
+   } 
    
    previousPoke(){
      
@@ -66,7 +67,8 @@ export class Tab2Page {
       this.pokePlus = this.data["previous"]
       this.getNew(this.pokePlus)
       this.previouss = true
-  
+      this.nextButton = false
+      
      } if (this.data.previous == "https://pokeapi.co/api/v2/pokemon?offset=0&limit=20") {
       this.previouss = false
       
@@ -76,31 +78,43 @@ export class Tab2Page {
   }
 
   displayPoke(){
-    const getLastItem = (thePath) =>
-    thePath.substring(thePath.lastIndexOf("/") + 1);
+    const getLastItem = (path) =>
+    path.substring(path.lastIndexOf("/") + 1);
 
     this.dataPokes.forEach((pokemon) => {
+
     let uri = pokemon.url;
     uri = uri.substring(0, uri.length - 1);
     let idPoke = getLastItem(uri)
     pokemon["id"] = idPoke;
-    pokemon[
-      "urlImage"
-    ] = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${idPoke}.png`;
+    if (pokemon.id < 1092 ) {
+      pokemon[
+        "urlImage"
+      ] = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${idPoke}.png`;
+      
+    }
 
-    pokemon["urlSpecie"] = `https://pokeapi.co/api/v2/pokemon-species/${idPoke}`
+    if (pokemon.id < 894) {
+      pokemon["urlSpecie"] = `https://pokeapi.co/api/v2/pokemon-species/${idPoke}`
+    
+   
     
     
     fetch(pokemon.urlSpecie)
     .then(response => response.json())
     .then((data) => {
+
+      console.log("Data>>>>>",data)
       if (data.names.length > 0) {
         pokemon["frenchName"] = data.names[4].name
+        
       } else {
         pokemon["frenchName"] = this.capitalize(data.name)
       } 
-      if (data.color != null) {
-       } if (data.color.name == "white"){
+      
+      if (data.color == null) {
+       pokemon["pokeColor"] = "black"
+       } else if (data.color.name == "white"){
         pokemon["pokeColor"] = "grey"
        }else if(data.color.name == "yellow"){
          pokemon["pokeColor"] = "orange"
@@ -109,8 +123,11 @@ export class Tab2Page {
        } else {
         pokemon["pokeColor"] = data.color.name
        }
-   
+      
     });
+  } else {
+    pokemon["englishName"] = this.capitalize(pokemon.name)
+  }
 
     });
   }

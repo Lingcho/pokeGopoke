@@ -20,11 +20,24 @@
  
   <ion-card *ngIf="details">
     <ion-card-header>
-      <ion-card-title>
-        {{ details.names[4].name }}
-      </ion-card-title>
+      <ng-template [ngIf]="details.names.length > 0"> 
+        <ion-card-title >
+          {{ details?.names[4]?.name }}
+        </ion-card-title>
+      </ng-template>
+      <ng-template [ngIf]="details.names.length == []">
+      
+        <ion-card-title>
+          {{ details?.name?.charAt(0).toUpperCase()+ details?.name.slice(1)}}
+        </ion-card-title>
+
+      </ng-template>
+     
+
+
+
       <ion-card-subtitle>
-       {{details.genera[3].genus}}
+       {{details?.genera[3]?.genus}}
       </ion-card-subtitle>
     </ion-card-header>
 
@@ -34,7 +47,7 @@
         
         <ion-row>
           <ion-col class="infos-img" >
-            <ion-img [src]="poke.sprites.front_default" ></ion-img>
+            <ion-img [src]="poke?.urlSpecie" ></ion-img>
           </ion-col>
           <ion-col *ngIf="flavor">
             Résumé:
@@ -59,29 +72,29 @@
           <ion-col>
             <ion-item lines="none">
               <ion-icon [src]="heart" slot="start"></ion-icon>
-              <ion-label>{{poke.stats[0].base_stat}}</ion-label>
+              <ion-label>{{poke?.stats[0]?.base_stat}}</ion-label>
             </ion-item>
             <ion-item lines="none">
               <ion-icon [src]="sword1" slot="start"></ion-icon>
-              <ion-label>{{poke.stats[1].base_stat}}</ion-label>
+              <ion-label>{{poke?.stats[1]?.base_stat}}</ion-label>
             </ion-item>
             <ion-item lines="none">
               <ion-icon [src]="shield2" slot="start"></ion-icon>
-              <ion-label>{{poke.stats[2].base_stat}}</ion-label>
+              <ion-label>{{poke?.stats[2]?.base_stat}}</ion-label>
             </ion-item>
           </ion-col>
           <ion-col>
             <ion-item lines="none">
               <ion-icon [src]="sword2" slot="start"></ion-icon>
-              <ion-label>{{poke.stats[3].base_stat}}</ion-label>
+              <ion-label>{{poke?.stats[3]?.base_stat}}</ion-label>
             </ion-item>
             <ion-item lines="none">
               <ion-icon [src]="shield1" slot="start"></ion-icon>
-              <ion-label>{{poke.stats[4].base_stat}}</ion-label>
+              <ion-label>{{poke?.stats[4]?.base_stat}}</ion-label>
             </ion-item>
             <ion-item lines="none">
               <ion-icon [src]="speed" slot="start"></ion-icon>
-              <ion-label>{{poke.stats[5].base_stat}}</ion-label>
+              <ion-label>{{poke?.stats[5]?.base_stat}}</ion-label>
             </ion-item>
           </ion-col>
           
@@ -94,11 +107,7 @@
      
       
  
-      <!-- <ion-item lines="none">
-        <ion-icon name="clipboard" slot="start"></ion-icon>
-        <ion-label text-wrap>{{ information.Director }}</ion-label>
-      </ion-item>
-  -->
+     
      
     </ion-card-content>
   </ion-card>

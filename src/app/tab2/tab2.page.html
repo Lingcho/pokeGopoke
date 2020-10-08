@@ -6,10 +6,10 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/"></ion-back-button>
     </ion-buttons>
-    <ion-button *ngIf="previouss" slot="end" (click) = "previousPoke()" >
-      <ion-icon name="play-back-circle-outline"></ion-icon>
-    </ion-button>
-      <ion-button slot="end" (click) = "nextPoke()" >
+    <ion-button *ngIf="previouss" color="warning" slot="end" (click) = "previousPoke()" >
+      <ion-icon name="play-back-circle-outline" ></ion-icon>
+    </ion-button >
+      <ion-button slot="end" (click) = "nextPoke()" [disabled]="nextButton"  >
       <ion-icon name="play-forward-circle-outline"></ion-icon>    
     </ion-button>
   </ion-toolbar>
@@ -23,10 +23,18 @@
       
       <ion-img [src]="item?.urlImage"></ion-img>
 
-  <ion-label [ngStyle]="{color: item?.pokeColor,'background-color': '#e9ecef'}">   
-        {{item.frenchName}}
-  </ion-label>
+      <div *ngIf="item?.frenchName;else englishName">
+        <ion-label [ngStyle]="{color: item?.pokeColor,'background-color': '#e9ecef'}">   
+          {{item.frenchName}}
+    </ion-label>
+  
+      </div>
 
+      <ng-template #englishName>
+
+        {{item.englishName}}
+      </ng-template>
+  
 
 
 

@@ -34,7 +34,8 @@ export class Tab3Page implements OnInit{
   
   ngOnInit(){ 
     let id = this.activatedRoute.snapshot.paramMap.get('id')
-    this.displayPokedetails(id)
+    this.displayPokedetails(id
+      )
    
   }
 
@@ -67,7 +68,11 @@ export class Tab3Page implements OnInit{
     
     this.http.getPokemonDetails(id).subscribe(result => {
       this.details = result
-      console.log("pokess",this.details)
+      console.log("details =>>",this.details)
+      let frName = this.findValuesHelper(this.details, "names")
+        
+    
+
   
      let flavors = this.findValuesHelper(this.details, "flavor_text_entries")
       let frenchFlavor = []
@@ -77,7 +82,7 @@ export class Tab3Page implements OnInit{
         if (ele.language.name == "fr") {
           frenchFlavor.push(ele.flavor_text)
           this.flavor = frenchFlavor
-        }
+        } 
       });
       
      });
@@ -87,16 +92,13 @@ export class Tab3Page implements OnInit{
     .then((response) => {
      
      this.poke = response
+     this.poke["urlSpecie"] = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`
+     console.log("poke:=)",this.poke)
     
     })
     
   }
 
-  nextPokedetails() {
-    let counterId =+ this.idPoke
-    this.displayPokedetails(counterId)
-    
-  }
   findValuesHelper(obj, key) {
     let list = [ ];
     if (!obj) return list;
