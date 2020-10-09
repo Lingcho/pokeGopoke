@@ -83,11 +83,12 @@ export class Tab2Page {
 
     this.dataPokes.forEach((pokemon) => {
 
+
     let uri = pokemon.url;
     uri = uri.substring(0, uri.length - 1);
     let idPoke = getLastItem(uri)
     pokemon["id"] = idPoke;
-    if (pokemon.id < 1092 ) {
+    if (pokemon.id < 10092 ) {
       pokemon[
         "urlImage"
       ] = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${idPoke}.png`;

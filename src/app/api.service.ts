@@ -10,7 +10,7 @@ import { map } from 'rxjs/operators';
 
 export class ApiService {
   apiUrl = "https://pokeapi.co/api/v2/pokemon"
-
+  apiUrlId = 'https://pokeapi.co/api/v2/pokemon'
   
   constructor(private http: HttpClient) {}
 
@@ -22,8 +22,11 @@ export class ApiService {
   //   return this.http.get(`https://pokeapi.co/api/v2/pokemon?offset=${this.offset}&limit=20`)
   // }
 
-  getPokemonDetails(id){
-    return this.http.get(`https://pokeapi.co/api/v2/pokemon-species/${id}/`);
+  getPokemonDetails(id) : Observable<any>{
+    
+    return this.http.get(`${this.apiUrlId}/${id}`).pipe(
+      map(this.extractData)
+    );
   }
 
 
@@ -37,9 +40,7 @@ export class ApiService {
     )
   }
 
-  getWrapper(id) {
-    
-  }
+ 
  
 
 }
