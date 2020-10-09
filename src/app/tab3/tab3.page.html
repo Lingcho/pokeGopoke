@@ -1,5 +1,4 @@
 
-
 <ion-header [translucent]="true">
   
   <ion-toolbar color="primary">
@@ -20,14 +19,9 @@
 </ion-header>
 
 <ion-content padding *ngIf="pokeDetail">
- 
   <ion-card >
     <ion-card-header>
-      <ion-card-title>
-    
-      </ion-card-title>
-
-      <div *ngIf="pokeDetail; else englishName">
+      <div *ngIf="pokeDetail?.frenchName; else englishName">
         <ion-card-title >
          {{pokeDetail.frenchName}}
         </ion-card-title>
@@ -37,31 +31,39 @@
           {{pokeDetail.name}}
         </ion-card-title>
       </ng-template>
-
       <div *ngIf="pokeDetail?.frenchType; else englishType">
         <ion-card-subtitle>
           {{pokeDetail.frenchType}}
         </ion-card-subtitle>
       </div>
-      
       <ng-template #englishType>
         <ion-card-subtitle>
           {{pokeDetail.englishType}}
         </ion-card-subtitle>
       </ng-template>
-      
+      <ion-card-subtitle>
+        {{pokeDetail.weight}} Kg
+      </ion-card-subtitle> 
     </ion-card-header>
-
-    
     <ion-card-content >
       <ion-grid>
-        
         <ion-row>
+
           <ion-col class="infos-img" >
-            <ion-img [src]="pokeDetail.sprite" ></ion-img>
+            <ion-row>
+              <ion-img *ngIf="pokeDetail?.sprite"[src]="pokeDetail?.sprite" ></ion-img>
+              <ion-img *ngIf="details?.sprites.front_shiny" [src]="details?.sprites.front_shiny" [hidden]="flavorPlus"></ion-img>
+            </ion-row>
+            <ion-row >
+              <ion-img *ngIf="details?.sprites.back_default" [src]="details?.sprites.back_default" ></ion-img>
+              <ion-img *ngIf="details?.sprites.back_shiny" [src]="details?.sprites.back_shiny"[hidden]="flavorPlus" ></ion-img>
+            </ion-row>
           </ion-col>
+
           <ion-col >
-            Résumé: {{pokeDetail.flavor[0]}}
+            Résumé:
+            <br> 
+            {{pokeDetail.flavor[0]}}
           <br>
           <span>
             <ion-icon size="small" name="caret-down-circle-outline" (click)="onflavor()" [hidden]="!flavorPlus"></ion-icon>
@@ -70,53 +72,43 @@
              {{pokeDetail.flavor[pokeDetail.flavor.length -1]}}
           </div>
           <span>
-           
             <ion-icon size="small" name="caret-up-circle-outline" (click)="onflavor()" [hidden]="flavorPlus"></ion-icon>
           </span>
-
           </ion-col>
         </ion-row>
+
         <ion-row>
           <ion-col>
             <ion-item lines="none">
               <ion-icon [src]="heart" slot="start"></ion-icon>
-              <ion-label></ion-label>
+              <ion-label>{{pokeDetail.hp}}</ion-label>
             </ion-item>
             <ion-item lines="none">
               <ion-icon [src]="sword1" slot="start"></ion-icon>
-              <ion-label></ion-label>
-            </ion-item>
-            <ion-item lines="none">
-              <ion-icon [src]="shield2" slot="start"></ion-icon>
-              <ion-label></ion-label>
-            </ion-item>
-          </ion-col>
-          <ion-col>
-            <ion-item lines="none">
-              <ion-icon [src]="sword2" slot="start"></ion-icon>
-              <ion-label></ion-label>
+              <ion-label>{{pokeDetail.attack}}</ion-label>
             </ion-item>
             <ion-item lines="none">
               <ion-icon [src]="shield1" slot="start"></ion-icon>
-              <ion-label></ion-label>
-            </ion-item>
-            <ion-item lines="none">
-              <ion-icon [src]="speed" slot="start"></ion-icon>
-              <ion-label></ion-label>
+              <ion-label>{{pokeDetail.defence}}</ion-label>
             </ion-item>
           </ion-col>
           
-
+          <ion-col>
+            <ion-item lines="none">
+              <ion-icon [src]="sword2" slot="start"></ion-icon>
+              <ion-label>{{pokeDetail.specialAttack}}</ion-label>
+            </ion-item>
+            <ion-item lines="none">
+              <ion-icon [src]="shield2" slot="start"></ion-icon>
+              <ion-label>{{pokeDetail.specialDefence}}</ion-label>
+            </ion-item>
+            <ion-item lines="none">
+              <ion-icon [src]="speed" slot="start"></ion-icon>
+              <ion-label>{{pokeDetail.speed}}</ion-label>
+            </ion-item>
+          </ion-col>
         </ion-row>
-
-
-      </ion-grid>
- 
-     
-      
- 
-     
-     
+      </ion-grid> 
     </ion-card-content>
   </ion-card>
   

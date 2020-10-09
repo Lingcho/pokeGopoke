@@ -54,7 +54,7 @@ export class Tab2Page {
       this.pokePlus = this.data["next"]
       this.getNew(this.pokePlus)
       this.previouss=true 
-          console.log(this.data)
+         
      } if (this.data.next =="https://pokeapi.co/api/v2/pokemon?offset=1040&limit=10") {
         this.nextButton = true
      }
@@ -88,7 +88,7 @@ export class Tab2Page {
     uri = uri.substring(0, uri.length - 1);
     let idPoke = getLastItem(uri)
     pokemon["id"] = idPoke;
-    if (pokemon.id < 10092 ) {
+    if (pokemon.id < 10091 ) {
       pokemon[
         "urlImage"
       ] = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${idPoke}.png`;
@@ -105,7 +105,6 @@ export class Tab2Page {
     .then(response => response.json())
     .then((data) => {
 
-      console.log("Data>>>>>",data)
       if (data.names.length > 0) {
         pokemon["frenchName"] = data.names[4].name
         
