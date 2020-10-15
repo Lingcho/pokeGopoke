@@ -57,19 +57,7 @@ export class Tab1Page {
   
   onSearchPokeByName() {
     const search = encodeURIComponent(this.searchPokeByName).trim().toLowerCase()
-    this.pokemon.map((poke) => {
-      this.pokemonData.name = poke.name
-      this.pokemonData.image = poke.image
-      if (poke.frenchName != null) {
-        this.pokemonData.frenchName = poke.frenchName
-       
-      }
-      if (search == (this.pokemonData.frenchName.toLocaleLowerCase() || this.pokemonData.name)) {
-        return poke       
-      }
-      console.log("searchhh",search);
-      
-    })
+   
   
   }
 
