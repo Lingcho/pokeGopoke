@@ -15,6 +15,7 @@ export class Tab3Page implements OnInit{
    speed :string = "../../assets/icon/speed.svg"
 
   pokeDetail = {
+    color: '',
     name:'',
     frenchName:'',
     frenchType:'',
@@ -79,7 +80,7 @@ export class Tab3Page implements OnInit{
     this.http.getPokemonDetails(id).subscribe(result => {
       this.details = result
       this.pokeResult = result
-
+      this.pokeDetail["color"] = result.color
       this.pokeDetail["name"] = this.capitalize(result["name"])
       this.pokeDetail["urlSpecie"] = result["species"]["url"]
       this.pokeDetail["hp"] = result["stats"]["0"]["base_stat"]
@@ -163,4 +164,3 @@ capitalize(str) {
     return str.charAt(0).toUpperCase() + str.slice(1);
   }
 }
-

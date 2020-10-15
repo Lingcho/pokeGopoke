@@ -4,15 +4,47 @@
       <img src="../../assets/pokemon.svg.png" />
     </ion-title>
   </ion-toolbar>
+    
+ 
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content>
+  
+      
   <ion-card>
     <ion-card-header>
-      <ion-card-subtitle>Trouve les Pokémons </ion-card-subtitle>
+      <ion-card-subtitle>Un pokémon en particulier</ion-card-subtitle>
     </ion-card-header>
     <ion-card-content>
-      <ion-button expand="full" href="/tabs/tab2">Chercher</ion-button>
+      <ion-searchbar placeholder="Ton pokémon " type="text" (ionChange)="onSearchChange($event)" [debounce]="250" showCancelButton="always"></ion-searchbar>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-list *ngIf="pokemonSearch.length != 0">
+    <ion-item>   
+        <ion-img [src]="pokemonSearch?.image"></ion-img>
+      
+      <div *ngIf="pokemonSearch?.frenchName;else englishName">
+        <ion-chip color="primary" mode="ios" outline="true">
+          <ion-label> {{pokemonSearch.frenchName}}</ion-label>
+        </ion-chip>
+      </div>
+        <ng-template #englishName>
+          <ion-chip color="primary" mode="ios" outline="true">
+            <ion-label> {{pokemonSearch.name}}</ion-label>
+          </ion-chip>
+           
+          
+        </ng-template>
+      
+  </ion-item>
+  </ion-list>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>Ici vit de nombreux Pokémons</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-button expand="full" href="/tabs/tab2">Découvre-les !</ion-button>
     </ion-card-content>
   </ion-card>
 
