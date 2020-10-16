@@ -7,12 +7,12 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['tab3.page.scss']
 })
 export class Tab3Page implements OnInit{
-   sword1 :string = "../../assets/icon/sword1.svg"
-   sword2 :string = "../../assets/icon/sword2.svg"
-   heart :string = "../../assets/icon/heart.svg"
-   shield1 :string = "../../assets/icon/shield2.svg"
-   shield2 :string = "../../assets/icon/shield1.svg"
-   speed :string = "../../assets/icon/speed.svg"
+  sword1 :string = "../../assets/icon/sword1.svg"
+  sword2 :string = "../../assets/icon/sword2.svg"
+  heart :string = "../../assets/icon/heart.svg"
+  shield1 :string = "../../assets/icon/shield2.svg"
+  shield2 :string = "../../assets/icon/shield1.svg"
+  speed :string = "../../assets/icon/speed.svg"
 
   pokeDetail = {
     color: '',
@@ -32,6 +32,7 @@ export class Tab3Page implements OnInit{
     urlSpecie:'',
     weight:0
   };
+
   details:any;
   pokeResult:any;
   idPoke:number;
@@ -44,7 +45,6 @@ export class Tab3Page implements OnInit{
   ngOnInit(){ 
     let id = this.activatedRoute.snapshot.paramMap.get('id')
     this.displayPokedetails(id)
-    
   }
 
   nextPokeDetails(){
@@ -112,7 +112,6 @@ export class Tab3Page implements OnInit{
             }
           });       
          });
-
           this.getDetail(data, "names", "fr", "frenchName", "name")
           this.getDetail(data, "genera", "fr", "frenchType", "genus")
           this.getDetail(data, "genera", "en", "englishType", "genus")
@@ -121,10 +120,8 @@ export class Tab3Page implements OnInit{
       }
     });  
   }
-  
 
   findValuesHelper(obj, key) {
-    
     let list = [ ];
     if (!obj) return list;
     if (obj instanceof Array) {
@@ -145,22 +142,23 @@ export class Tab3Page implements OnInit{
     }
     return list;
   }
- getDetail = (array:any, research:string, lang:string, type:string, propri:any)  => {
-  let containeur = this.findValuesHelper(array, research)
-          containeur.forEach(element => {    
-            element.forEach(ele => {
-              if (ele.language.name == lang) {
-                this.pokeDetail[type] = ele[propri]
-              }
-            });
-          });
-}
-  onflavor() {
-    
-    this.flavorPlus = !this.flavorPlus
 
-}
-capitalize(str) {
+  getDetail = (array:any, research:string, lang:string, type:string, propri:any)  => {
+    let containeur = this.findValuesHelper(array, research)
+    containeur.forEach(element => {    
+      element.forEach(ele => {
+        if (ele.language.name == lang) {
+          this.pokeDetail[type] = ele[propri]
+        }
+      });
+    });
+  }
+
+  onflavor() {
+    this.flavorPlus = !this.flavorPlus
+  }
+
+  capitalize(str) {
     return str.charAt(0).toUpperCase() + str.slice(1);
   }
 }

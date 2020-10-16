@@ -3,7 +3,6 @@ import { HttpClient } from "@angular/common/http";
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-
 @Injectable({
   providedIn: "root",
 })
@@ -16,14 +15,11 @@ export class ApiService {
   offset = 0
   constructor(private http: HttpClient) {}
 
-
   getPokemonDetails(id) : Observable<any>{
-    
     return this.http.get(`${this.apiUrlId}/${id}`).pipe(
       map(this.extractData)
     );
   }
-
 
   extractData(res: Response) {
     return res 
@@ -40,46 +36,38 @@ export class ApiService {
     return this.http.get(`${this.apiUrl}/?offset=${this.offset}&limit=1050`)
     .pipe(map(result => {
       return result['results']
-    }),
-    map(pokemons => {
-      
-     return pokemons.map((poke, index) => {
-       let id = index + 1
-       if (id > 893) {
-         id += 9108
-       }
-       if (id < 10091) {
-         poke.image = this.getPokemonImage(id)
-         poke.pokeIndex = id
-       }
+      }),
 
-       if (id < 894) {
-         poke.pokeUrlSpicie = `${this.urlSpecie}${id}`
-         fetch(poke.pokeUrlSpicie)
-         .then(response => (response.json())
-         .then((data) => {
-  
-           let containeur = this.findValuesHelper(data, "names")
-           containeur.forEach(element => {    
-             element.forEach(ele => {
-               if (ele.language.name == "fr") {
-                 poke.frenchName = ele.name
-               }
-             });
-           });
-       
-         
-           return data
-         }),
-       
-         )
-       }
-     
-      return poke
-
-      })
-    }),
-    
+      map(pokemons => {
+      return pokemons.map((poke, index) => {
+        let id = index + 1
+        if (id > 893) {
+          id += 9108
+        }
+        if (id < 10091) {
+          poke.image = this.getPokemonImage(id)
+          poke.pokeIndex = id
+        }
+        if (id < 894) {
+          poke.pokeUrlSpicie = `${this.urlSpecie}${id}`
+          fetch(poke.pokeUrlSpicie)
+          .then(response => (response.json())
+          .then((data) => {
+            let containeur = this.findValuesHelper(data, "names")
+            containeur.forEach(element => {    
+              element.forEach(ele => {
+                if (ele.language.name == "fr") {
+                  poke.frenchName = ele.name
+                }
+              });
+            });
+            return data
+          }),
+          )
+        }
+        return poke
+        })
+      }),
     )
   }
  
@@ -98,18 +86,14 @@ export class ApiService {
         return list;
     }
     if (obj[key]) list.push(obj[key]);
-
     if ((typeof obj == "object") && (obj !== null)) {
-        let children = Object.keys(obj);
-        if (children.length > 0) {
-            for (let i = 0; i < children.length; i++) {
-                list = list.concat(this.findValuesHelper(obj[children[i]], key));
-            }
+      let children = Object.keys(obj);
+      if (children.length > 0) {
+        for (let i = 0; i < children.length; i++) {
+            list = list.concat(this.findValuesHelper(obj[children[i]], key));
         }
+      }
     }
     return list;
   }
-  
 }
-
-

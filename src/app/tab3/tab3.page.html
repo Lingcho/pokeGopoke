@@ -11,11 +11,10 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/tab2"></ion-back-button>
     </ion-buttons>
-  
-  <ion-button slot="end" (click) = "nextPokeDetails()" >
-  <ion-icon name="play-forward-circle-outline"></ion-icon>    
-  </ion-button>
-  </ion-toolbar>
+    <ion-button slot="end" (click) = "nextPokeDetails()" >
+    <ion-icon name="play-forward-circle-outline"></ion-icon>    
+    </ion-button>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content padding *ngIf="pokeDetail">
@@ -48,7 +47,6 @@
     <ion-card-content >
       <ion-grid>
         <ion-row>
-
           <ion-col class="infos-img" >
             <ion-row>
               <ion-img *ngIf="pokeDetail?.sprite"[src]="pokeDetail?.sprite" ></ion-img>
@@ -59,7 +57,6 @@
               <ion-img *ngIf="details?.sprites.back_shiny" [src]="details?.sprites.back_shiny"[hidden]="flavorPlus" ></ion-img>
             </ion-row>
           </ion-col>
-
           <ion-col >
             Résumé:
             <br> 

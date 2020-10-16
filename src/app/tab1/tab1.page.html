@@ -14,25 +14,17 @@
       </ion-card-content>
     </ion-card>
   </ion-toolbar>
-    
- 
 </ion-header>
-
-<ion-content>
-  
-      
-  
+<ion-content>      
   <ion-card>
     <ion-card-header>
       <ion-card-subtitle>Ici vit de nombreux Pokémons</ion-card-subtitle>
     </ion-card-header>
-    <ion-card-content>
-      <ion-button expand="full" href="/tabs/tab2">Découvre-les !</ion-button>
-    </ion-card-content>
+      <ion-button expand="block" shape="round" [routerLink]="['/tab2']" routerLinkActive="router-link-active" >
+        Découvre-les !
+      </ion-button>
   </ion-card>
-
   <ion-list>
-    
     <ion-item *ngFor="let item of pokemon | slice:0:5">
       <ion-avatar>
         <img [src]="item.image" />
@@ -50,24 +42,6 @@
         <ion-chip color="warning" [routerLink]="['/tab3', item.pokeIndex]">
           <ion-label># {{item.pokeIndex}}</ion-label>
         </ion-chip>
-    
     </ion-item>
   </ion-list>
- 
-
-  <!-- <ion-list >
-    <ion-item *ngFor="let item of pokemonSearch">   
-        
-      
-     
-      
-  </ion-item>
-  </ion-list> -->
-
-
-  
-
-
-
-  
 </ion-content>

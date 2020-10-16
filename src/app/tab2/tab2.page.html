@@ -15,14 +15,10 @@
   </ion-toolbar>
 </ion-header>
 
-
 <ion-content [fullscreen]="true">
-  
   <ion-card >
     <ion-item *ngFor="let item of dataPokes">
-    
       <ion-img [src]="item?.urlImage"></ion-img>
-      
       <div *ngIf="item?.frenchName;else englishName">
         <ion-card-subtitle> # {{item.id}}</ion-card-subtitle>
         <ion-label [ngStyle]="{color: item?.pokeColor,'background-color': '#e9ecef'}">   
@@ -40,8 +36,5 @@
         Détails
       </ion-button>
     </ion-item>
-  
-  
   </ion-card>
-  
 </ion-content>
