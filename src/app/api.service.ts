@@ -13,6 +13,7 @@ export class ApiService {
   apiUrlId = 'https://pokeapi.co/api/v2/pokemon'
   imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"
   urlSpecie = "https://pokeapi.co/api/v2/pokemon-species/"
+  offset = 0
   constructor(private http: HttpClient) {}
 
 
@@ -34,9 +35,9 @@ export class ApiService {
     )
   }
 
-  getPokemons() {
+  getPokemons(offset) {
     
-    return this.http.get(`${this.apiUrl}/?offset=0&limit=1050`)
+    return this.http.get(`${this.apiUrl}/?offset=${this.offset}&limit=1050`)
     .pipe(map(result => {
       return result['results']
     }),

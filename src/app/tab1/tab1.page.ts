@@ -1,6 +1,7 @@
-import { Component } from "@angular/core";
-import { element } from 'protractor';
+import { Component, ViewChild } from "@angular/core";
 import { ApiService } from "../api.service";
+import { IonInfiniteScroll } from '@ionic/angular';
+
 
 
 @Component({
@@ -10,10 +11,12 @@ import { ApiService } from "../api.service";
 })
 
 export class Tab1Page {
+  @ViewChild(IonInfiniteScroll) infinite: IonInfiniteScroll;
   searchPokeByName = '';
   elements = [];
   pokemon = [];
   pokemonSearch= []
+  offset = 0
    
   constructor(private http: ApiService) {
    
@@ -24,29 +27,34 @@ export class Tab1Page {
     this.loadPokemon()
   }
 
-   loadPokemon() {
-    this.http.getPokemons().subscribe(res => {
-      
-      this.pokemon = res
-      
+   loadPokemon(loadMore = false, event?) {
+     if (loadMore) {
+       this.offset += 10
+     }
+    this.http.getPokemons(this.offset).subscribe(res => {
+      this.pokemon = [...this.pokemon, ...res]
+      console.log("range",this.pokemon);
+      if (event) {
+        event.target.complete()
+      }
     }) 
   }
 
   onSearchChange(e) {
-   
     let val = e.detail.value;
    console.log(val);
+  
    this.pokemon.forEach(element => {
       
       if (element.frenchName) {
         if (val == element.frenchName.toLowerCase()) {
-         this.pokemonSearch = element
-         console.log(this.pokemonSearch);
+         this.pokemon = element
+         console.log(this.pokemon);
          
           
         }
       } else if (val == element.name) {
-        this.pokemonSearch = element
+        this.pokemon = element
         console.log(element);
         
 
@@ -55,8 +63,48 @@ export class Tab1Page {
    
   }
   
-  onSearchPokeByName() {
-    const search = encodeURIComponent(this.searchPokeByName).trim().toLowerCase()
+  onSearchPokeByName(e) {
+    let val = e.target.value;
+    if (val == '') {
+      this.offset = 0;
+      this.loadPokemon()
+      return
+    }
+    if (val && val.trim() != '') {
+      this.pokemon = this.pokemon.filter((item:any) => {
+        
+        if (item.pokeIndex == val) {
+          return true
+        }
+       
+        if (item.frenchName) {
+          console.log("indexOk",(item.frenchName.toLowerCase().indexOf(val.toLowerCase()) > -1));
+          
+          return (item.frenchName.toLowerCase().indexOf(val.toLowerCase()) > -1)
+
+        } else {
+          return (item.name.toLowerCase().indexOf(val.toLowerCase()) > -1)
+        }
+      })
+
+    }
+  //  this.pokemon.forEach(element => {
+      
+  //     if (element.frenchName) {
+  //       if (val == element.frenchName.toLowerCase()) {
+  //        this.pokemonSearch = element
+  //        console.log(this.pokemonSearch);
+         
+          
+  //       }
+  //     } else if (val == element.name) {
+  //       this.pokemonSearch = element
+  //       console.log(element);
+        
+
+  //     }
+  //   });
+   
    
   
   }

@@ -4,6 +4,16 @@
       <img src="../../assets/pokemon.svg.png" />
     </ion-title>
   </ion-toolbar>
+  <ion-toolbar>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-subtitle>Un pokémon en particulier</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-searchbar placeholder="Ton pokémon " type="text" debounce="500" (ionChange)="onSearchPokeByName($event)" ></ion-searchbar>
+      </ion-card-content>
+    </ion-card>
+  </ion-toolbar>
     
  
 </ion-header>
@@ -11,34 +21,7 @@
 <ion-content>
   
       
-  <ion-card>
-    <ion-card-header>
-      <ion-card-subtitle>Un pokémon en particulier</ion-card-subtitle>
-    </ion-card-header>
-    <ion-card-content>
-      <ion-searchbar placeholder="Ton pokémon " type="text" (ionChange)="onSearchChange($event)" [debounce]="250" showCancelButton="always"></ion-searchbar>
-    </ion-card-content>
-  </ion-card>
-
-  <ion-list *ngIf="pokemonSearch.length != 0">
-    <ion-item>   
-        <ion-img [src]="pokemonSearch?.image"></ion-img>
-      
-      <div *ngIf="pokemonSearch?.frenchName;else englishName">
-        <ion-chip color="primary" mode="ios" outline="true">
-          <ion-label> {{pokemonSearch.frenchName}}</ion-label>
-        </ion-chip>
-      </div>
-        <ng-template #englishName>
-          <ion-chip color="primary" mode="ios" outline="true">
-            <ion-label> {{pokemonSearch.name}}</ion-label>
-          </ion-chip>
-           
-          
-        </ng-template>
-      
-  </ion-item>
-  </ion-list>
+  
   <ion-card>
     <ion-card-header>
       <ion-card-subtitle>Ici vit de nombreux Pokémons</ion-card-subtitle>
@@ -47,6 +30,42 @@
       <ion-button expand="full" href="/tabs/tab2">Découvre-les !</ion-button>
     </ion-card-content>
   </ion-card>
+
+  <ion-list>
+    
+    <ion-item *ngFor="let item of pokemon | slice:0:5">
+      <ion-avatar>
+        <img [src]="item.image" />
+      </ion-avatar>
+      <div *ngIf="item.frenchName;else englishName">
+        <ion-chip color="primary" mode="ios" outline="true">
+          <ion-label> {{item.frenchName}}</ion-label>
+        </ion-chip>
+      </div>
+        <ng-template #englishName>
+          <ion-chip color="primary" outline="true">
+            <ion-label> {{item.id}}</ion-label>
+          </ion-chip>
+        </ng-template>
+        <ion-chip color="warning">
+          <ion-label># {{item.pokeIndex}}</ion-label>
+        </ion-chip>
+    
+    </ion-item>
+  </ion-list>
+ 
+
+  <!-- <ion-list >
+    <ion-item *ngFor="let item of pokemonSearch">   
+        
+      
+     
+      
+  </ion-item>
+  </ion-list> -->
+
+
+  
 
 
 
