@@ -21,26 +21,22 @@
   <ion-card >
     <ion-item *ngFor="let item of dataPokes">
     
-      
       <ion-img [src]="item?.urlImage"></ion-img>
-
+      
       <div *ngIf="item?.frenchName;else englishName">
+        <ion-card-subtitle> # {{item.id}}</ion-card-subtitle>
         <ion-label [ngStyle]="{color: item?.pokeColor,'background-color': '#e9ecef'}">   
           {{item.frenchName}}
-    </ion-label>
-  
+        </ion-label>
       </div>
-
-      <ng-template #englishName>
-
-        {{item.englishName}}
-      </ng-template>
-  
-
-
-
-      <ion-button fill="outline" slot="end" [routerLink]="['/tab3', item.id]" [ngStyle]="{color: item?.pokeColor}"
-      >
+      <div>  
+        <ng-template #englishName>
+          # {{item.id}}
+          <br>
+          {{item.englishName}}
+        </ng-template>
+      </div>
+      <ion-button fill="outline" slot="end" [routerLink]="['/tab3', item.id]" [ngStyle]="{color: item?.pokeColor}">
         Détails
       </ion-button>
     </ion-item>

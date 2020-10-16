@@ -45,6 +45,9 @@ export class ApiService {
       
      return pokemons.map((poke, index) => {
        let id = index + 1
+       if (id > 893) {
+         id += 9108
+       }
        if (id < 10091) {
          poke.image = this.getPokemonImage(id)
          poke.pokeIndex = id

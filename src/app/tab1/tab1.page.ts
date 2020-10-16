@@ -28,16 +28,19 @@ export class Tab1Page {
   }
 
    loadPokemon(loadMore = false, event?) {
-     if (loadMore) {
-       this.offset += 10
-     }
-    this.http.getPokemons(this.offset).subscribe(res => {
-      this.pokemon = [...this.pokemon, ...res]
-      console.log("range",this.pokemon);
-      if (event) {
-        event.target.complete()
-      }
-    }) 
+     this.http.getPokemons(this.offset).subscribe(res => {
+       this.pokemon = res
+     })
+    //  if (loadMore) {
+    //    this.offset += 10
+    //  }
+    // this.http.getPokemons(this.offset).subscribe(res => {
+    //   this.pokemon = [...this.pokemon, ...res]
+    //   console.log("range",this.pokemon);
+    //   if (event) {
+    //     event.target.complete()
+    //   }
+    // }) 
   }
 
   onSearchChange(e) {

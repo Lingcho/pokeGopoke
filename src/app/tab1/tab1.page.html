@@ -10,7 +10,7 @@
         <ion-card-subtitle>Un pokémon en particulier</ion-card-subtitle>
       </ion-card-header>
       <ion-card-content>
-        <ion-searchbar placeholder="Ton pokémon " type="text" debounce="500" (ionChange)="onSearchPokeByName($event)" ></ion-searchbar>
+        <ion-searchbar placeholder="Ton pokémon ou ID" type="text" debounce="500" (ionChange)="onSearchPokeByName($event)" ></ion-searchbar>
       </ion-card-content>
     </ion-card>
   </ion-toolbar>
@@ -38,16 +38,16 @@
         <img [src]="item.image" />
       </ion-avatar>
       <div *ngIf="item.frenchName;else englishName">
-        <ion-chip color="primary" mode="ios" outline="true">
+        <ion-chip color="primary" mode="ios" outline="true" [routerLink]="['/tab3', item.pokeIndex]">
           <ion-label> {{item.frenchName}}</ion-label>
         </ion-chip>
       </div>
         <ng-template #englishName>
-          <ion-chip color="primary" outline="true">
-            <ion-label> {{item.id}}</ion-label>
+          <ion-chip color="primary" outline="true" [routerLink]="['/tab3', item.pokeIndex]">
+            <ion-label> {{item.name}}</ion-label>
           </ion-chip>
         </ng-template>
-        <ion-chip color="warning">
+        <ion-chip color="warning" [routerLink]="['/tab3', item.pokeIndex]">
           <ion-label># {{item.pokeIndex}}</ion-label>
         </ion-chip>
     
